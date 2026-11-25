@@ -1,0 +1,14 @@
+import express from "express";
+import { createJobApplicationController, applyActionJobApplicationController, getJobApplicationsController, } from "./jobApplication.controller.js";
+import { createJobApplicationSchema, getJobApplicationsSchema, jobActionValidationSchema, } from "./jobApplication.validation.js";
+import JoiValidator from "../../lib/middleware/joiValidator.js";
+import expressTWrapper from "../../lib/wrappers/expressTWrapper.js";
+import auth, { authOptional } from "../../lib/middleware/auth.js";
+import JoiQueryValidator from "../../lib/middleware/joiQueryValidator.js";
+import expressWrapper from "../../lib/wrappers/expressWrapper.js";
+const jobApplicationRouter = express.Router();
+jobApplicationRouter.post("/:jobId", authOptional(), JoiValidator(createJobApplicationSchema), expressTWrapper(createJobApplicationController));
+jobApplicationRouter.get("/", auth(["admin", "hr"]), JoiQueryValidator(getJobApplicationsSchema), expressWrapper(getJobApplicationsController));
+jobApplicationRouter.patch("/:jobApplicationId", auth(["admin", "hr"]), JoiValidator(jobActionValidationSchema), expressTWrapper(applyActionJobApplicationController));
+export default jobApplicationRouter;
+//# sourceMappingURL=jobApplication.router.js.map

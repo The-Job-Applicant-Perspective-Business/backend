@@ -1,0 +1,18 @@
+import express from "express";
+import { createReviewCompany, deleteCompanyController, getReviewCompanies, getReviewCompanyIdController, updateCompanyController, applyActionCompanyController, syncCompanyRatingController, } from "./company.controller.js";
+import JoiValidator from "../../lib/middleware/joiValidator.js";
+import auth, { authOptional } from "../../lib/middleware/auth.js";
+import { createCompanyValidationSchema, getCompanySearchValidationSchema, updateCompanyValidationSchema, companyActionValidationSchema, } from "./company.validation.js";
+import JoiQueryValidator from "../../lib/middleware/joiQueryValidator.js";
+import expressWrapper from "../../lib/wrappers/expressWrapper.js";
+import expressTWrapper from "../../lib/wrappers/expressTWrapper.js";
+const companyRouter = express.Router();
+companyRouter.post("/", authOptional(), JoiValidator(createCompanyValidationSchema), expressWrapper(createReviewCompany));
+companyRouter.get("/", authOptional(), JoiQueryValidator(getCompanySearchValidationSchema), expressWrapper(getReviewCompanies));
+companyRouter.get("/sync-rating/:companyId", authOptional(), expressWrapper(syncCompanyRatingController));
+companyRouter.get("/:companyId", authOptional(), expressWrapper(getReviewCompanyIdController));
+companyRouter.put("/:companyId", auth("admin"), JoiValidator(updateCompanyValidationSchema), expressWrapper(updateCompanyController));
+companyRouter.patch("/:companyId", auth("admin"), JoiValidator(companyActionValidationSchema), expressTWrapper(applyActionCompanyController));
+companyRouter.delete("/:companyId", auth("admin"), expressTWrapper(deleteCompanyController));
+export default companyRouter;
+//# sourceMappingURL=company.router.js.map

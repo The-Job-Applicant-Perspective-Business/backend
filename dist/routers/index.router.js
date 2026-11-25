@@ -1,0 +1,24 @@
+import express from "express";
+import authRouter from "../apps/auth/auth.router.js";
+import userRouter from "../apps/user/user.router.js";
+import jobRouter from "../apps/job/job.router.js";
+import locationRouter from "../apps/location/location.router.js";
+import jobApplicationRouter from "../apps/jobApplication/jobApplication.router.js";
+import commonRouter from "../apps/common/common.router.js";
+import companyRouter from "../apps/company/company.router.js";
+import reviewRouter from "../apps/review/review.router.js";
+import notificationRouter from "../apps/notification/notification.router.js";
+import analyticsRouter from "../apps/analytics/analytics.router.js";
+const indexRouter = express.Router();
+indexRouter.use("/auth", authRouter);
+indexRouter.use("/users", userRouter);
+indexRouter.use("/jobs", jobRouter);
+indexRouter.use("/location", locationRouter);
+indexRouter.use("/job-applications", jobApplicationRouter);
+indexRouter.use("/companies", companyRouter);
+indexRouter.use("/reviews", reviewRouter);
+indexRouter.use("/common", commonRouter);
+indexRouter.use("/notifications", notificationRouter);
+indexRouter.use("/analytics", analyticsRouter);
+export default indexRouter;
+//# sourceMappingURL=index.router.js.map

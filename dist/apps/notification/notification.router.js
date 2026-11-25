@@ -1,0 +1,11 @@
+import express from "express";
+import { getNotificationsController, getNotificationsUnReadCountController, } from "./notification.controller.js";
+import auth from "../../lib/middleware/auth.js";
+import expressWrapper from "../../lib/wrappers/expressWrapper.js";
+import JoiQueryValidator from "../../lib/middleware/joiQueryValidator.js";
+import { notificationQueryValidationSchema } from "./notification.validation.js";
+const notificationRouter = express.Router();
+notificationRouter.get("/unread-count", auth(["hr", "admin"]), expressWrapper(getNotificationsUnReadCountController));
+notificationRouter.get("/", JoiQueryValidator(notificationQueryValidationSchema), auth(["hr", "admin"]), expressWrapper(getNotificationsController));
+export default notificationRouter;
+//# sourceMappingURL=notification.router.js.map
