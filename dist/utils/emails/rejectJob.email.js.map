@@ -1,1 +1,0 @@
-{"version":3,"file":"rejectJob.email.js","sourceRoot":"","sources":["../../../src/utils/emails/rejectJob.email.ts"],"names":[],"mappings":"AAAA,uCAAuC;AAEvC,MAAM,CAAC,MAAM,gBAAgB,GAAG,kCAAkC,CAAC;AAEnE,MAAM,CAAC,MAAM,aAAa,GAAG,CAAC,EAC1B,MAAM,EACN,QAAQ,EACR,YAAY,GAKf,EAAE,EAAE;IACD,OAAO;mBACQ,MAAM;;wBAED,QAAQ;gKACgI,YAAY;;KAEvK,CAAC;AACN,CAAC,CAAC"}

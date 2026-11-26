@@ -1,0 +1,14 @@
+import express from "express";
+import JoiQueryValidator from "../../lib/middleware/joiQueryValidator.js";
+import { createUserSchema, getUsersQuerySchema } from "./user.validation.js";
+import { createUserController, deleteUserController, getUsersController, updateUserController, } from "./user.controller.js";
+import auth from "../../lib/middleware/auth.js";
+import expressWrapper from "../../lib/wrappers/expressWrapper.js";
+import JoiValidator from "../../lib/middleware/joiValidator.js";
+import expressTWrapper from "../../lib/wrappers/expressTWrapper.js";
+const userRouter = express.Router();
+userRouter.get("/", JoiQueryValidator(getUsersQuerySchema), auth("admin"), expressWrapper(getUsersController));
+userRouter.post("/", JoiValidator(createUserSchema), auth("admin"), expressWrapper(createUserController));
+userRouter.put("/:userId", auth(["admin", "hr"]), expressTWrapper(updateUserController));
+userRouter.delete("/:userId", auth("admin"), expressTWrapper(deleteUserController));
+export default userRouter;
