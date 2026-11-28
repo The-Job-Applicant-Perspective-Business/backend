@@ -5,13 +5,17 @@
   "main": "dist/entrypoints/server.js",
   "type": "module",
   "scripts": {
-    "test": "NODE_ENV=test vitest",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "format": "npx prettier --write .",
-    "start": "node --env-file=.env dist/entrypoints/server.js",
-    "start-cron": "node --env-file=.env dist/entrypoints/cron.js",
+    "typecheck": "tsc --noEmit",
     "build": "tsc",
-    "dev": "NODE_ENV=development tsx watch --clear-screen=false --env-file=.env  src/entrypoints/server.ts",
-    "dev-cron": "NODE_ENV=development tsx watch --clear-screen=false --env-file=.env  src/entrypoints/cron.ts"
+    "verify": "npm run typecheck && npm run build",
+    "start": "node --env-file=.env dist/entrypoints/server.js",
+    "start:build": "npm run build && npm start",
+    "start-cron": "node --env-file=.env dist/entrypoints/cron.js",
+    "dev": "tsx watch --clear-screen=false --env-file=.env src/entrypoints/server.ts",
+    "dev-cron": "tsx watch --clear-screen=false --env-file=.env src/entrypoints/cron.ts"
   },
   "repository": {
     "type": "git",
